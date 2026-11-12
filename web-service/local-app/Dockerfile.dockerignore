@@ -1,0 +1,21 @@
+# Used with local-app/Dockerfile (build context: web-service/). Everything is left out except what the image needs,
+# so keys (.env), the DB ZIP and local environments never reach the build.
+*
+!galYAKsi_smaller_sign.html
+!local-app
+local-app/.env
+local-app/.env.*
+!local-app/.env.example
+local-app/.venv
+local-app/node_modules
+local-app/vendor
+local-app/data
+local-app/release
+local-app/experiments/out
+local-app/public/app.js
+local-app/public/chatbot1.js
+local-app/public/chatbot2.js
+local-app/public/landing.html
+local-app/**/*.zip
+local-app/**/*.log
+**/__pycache__

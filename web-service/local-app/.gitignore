@@ -1,0 +1,12 @@
+node_modules/
+.env
+.venv/
+data/
+vendor/
+*.log
+__pycache__/
+public/app.js
+public/chatbot1.js
+public/chatbot2.js
+public/landing.html
+experiments/out/

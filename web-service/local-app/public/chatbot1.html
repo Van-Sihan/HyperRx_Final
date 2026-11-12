@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:,"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>갤藥시</title>
+<link rel="stylesheet" href="/chatbot1.css">
+<script>try{const t=localStorage.getItem('galyaksi-chatbot-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t;}catch{document.documentElement.dataset.theme='light';}</script>
+</head>
+<body class="home">
+<div class="shell" id="shell">
+ <aside id="sidebar" aria-label="사이드바">
+  <div class="side-scroll">
+   <button id="new-question" class="side-new"><span aria-hidden="true">＋</span> 새 질문</button>
+   <section class="side-group">
+    <h2>실행 모드</h2>
+    <select id="execution" aria-label="실행 모드"><option value="demo">예시 데이터</option><option value="live">실제 연결</option></select>
+    <label id="demo-scale-label" class="side-field">예시 규모<select id="demo-scale"><option value="basic">기본 (관계 7개)</option><option value="large">대규모 (관계 60개)</option></select></label>
+   </section>
+   <section class="side-group" id="history-group" hidden>
+    <h2>최근 질문</h2>
+    <ul id="history"></ul>
+   </section>
+  </div>
+  <div class="side-bottom">
+   <button id="theme-toggle" class="side-link" aria-pressed="false"><span class="icon" aria-hidden="true"></span><span class="label"></span></button>
+   <button id="settings" class="side-link"><span class="icon" aria-hidden="true">●</span><span>연결 상태</span></button>
+  </div>
+  <div id="sidebar-resizer" role="separator" aria-orientation="vertical" aria-label="사이드바 너비 조절" tabindex="0"></div>
+ </aside>
+ <div class="main">
+  <header class="topbar">
+   <button id="sidebar-toggle" class="icon-button" aria-label="사이드바 접기" aria-expanded="true">☰</button>
+   <a class="brand" href="/">갤<span>藥</span>시</a>
+   <p class="tagline">여러 약의 관계를 근거와 함께 살펴봅니다</p>
+  </header>
+  <main id="thread">
+   <section id="welcome"><h1>무슨 약물이 궁금하신가요?</h1></section>
+   <section id="workspace" hidden>
+    <div id="question-summary" class="user-msg"><p id="submitted-question"></p><button id="edit-question" class="ghost">수정</button></div>
+    <p id="notice" class="notice"></p>
+    <section class="evidence" aria-label="관계 시각화">
+     <div class="evidence-bar">
+      <div class="tabs" role="group" aria-label="보기"><button data-tab="graph" class="active">관계도</button><button data-tab="documents">문서</button><button data-tab="relations">관계 목록</button></div>
+      <div class="graph-tools"><button data-dimension="2d" class="active" aria-pressed="true">2D</button><button data-dimension="3d" aria-pressed="false">3D</button><label><input id="show-labels" type="checkbox" checked> 라벨</label><button id="fit" aria-label="전체 맞춤">맞춤</button><button id="zoom-in" aria-label="확대">＋</button><button id="zoom-out" aria-label="축소">−</button></div>
+     </div>
+     <p id="graph-meta" class="graph-meta"></p>
+     <div class="explorer">
+      <div class="explorer-main">
+       <div id="graph-panel"><div id="focus-label" hidden></div><div id="graph"></div><div class="picker-row"><div id="edge-picker" aria-label="관계 선택"></div><button id="reset-edge" class="ghost" hidden>전체 보기</button></div></div>
+       <div id="documents-panel" hidden></div>
+       <div id="relations-panel" hidden></div>
+      </div>
+      <aside id="inspector"></aside>
+     </div>
+    </section>
+    <section class="answer-block" aria-label="답변"><div id="answers"></div></section>
+   </section>
+   <div id="composer-dock">
+    <form id="question-form" class="composer">
+     <label for="question" class="sr-only">질문</label>
+     <textarea id="question" rows="1" placeholder="약 이름이나 성분명, 궁금한 조합을 입력하세요"></textarea>
+     <button type="button" id="cancel" class="stop" hidden aria-label="생성 중지">■</button>
+     <button class="send" aria-label="질문 보내기">↑</button>
+    </form>
+    <div id="guidelines">
+     <ul>
+      <li>약 이름이나 성분명을 정확히 적을수록 근거를 잘 찾습니다.</li>
+      <li>답변은 근거 탐색용이며 의료진의 판단을 대체하지 않습니다.</li>
+     </ul>
+     <div id="suggestions"><button>심바스타틴과 클래리트로마이신을 함께 복용해도 되나요?</button><button>와파린과 아스피린의 상호작용을 알려줘</button></div>
+    </div>
+    <p class="dock-note">답변은 의료진의 판단을 대체하지 않습니다.</p>
+   </div>
+  </main>
+ </div>
+</div>
+<dialog id="status-dialog"><button id="close-dialog" aria-label="닫기">×</button><h2>연결 상태</h2><div id="status-content"></div><p class="muted">설정 파일: <code>local-app/.env</code> · 변경 후 서버를 다시 시작하세요.</p></dialog>
+<script type="module" src="/chatbot1.js"></script>
+</body>
+</html>

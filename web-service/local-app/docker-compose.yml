@@ -1,0 +1,40 @@
+# HyperRx in one container (Dockerfile). From this folder: docker compose up -d --build
+# The first start unpacks the team DB from the ZIP next to this folder (a few minutes); later starts load it in about a minute.
+# The port is open to this computer only (127.0.0.1). For other people, put an HTTPS proxy in front: README "Docker로 배포".
+services:
+  hyperrx:
+    build:
+      context: ..
+      dockerfile: local-app/Dockerfile
+    image: hyperrx:latest
+    ports:
+      - "127.0.0.1:8787:8787"
+    environment:
+      # Every reader enters their own OpenAI key (설정 › API 키); the server has none of its own.
+      REQUIRE_USER_KEY: "1"
+      # The public host name behind HTTPS, comma separated, e.g. hyperrx.example.org. Other names are refused.
+      ALLOWED_HOSTS: ""
+      KDB_ZIP: /release/kdb-v1.0.2-20261105.zip
+      # The operator's 공공데이터포털 key, used for 의약품안전나라 허가정보 when a reader gives none. Compose reads it from
+      # local-app/.env (MFDS_API_KEY=…), a file that is in neither git nor the image; only this one line is passed in.
+      # Without it, a node's dictionary falls back to the HyperRx summary for readers who enter no key (2026-11-10).
+      MFDS_API_KEY: ${MFDS_API_KEY:-}
+    volumes:
+      - type: bind
+        source: ../kdb-v1.0.2-20261105.zip
+        target: /release/kdb-v1.0.2-20261105.zip
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ../kdb-v1.0.2-20261105.zip.md5
+        target: /release/kdb-v1.0.2-20261105.zip.md5
+        read_only: true
+        bind:
+          create_host_path: false
+      - hyperrx-db:/app/data/kdb-work
+      - hyperrx-cache:/app/data/mfds-label-cache
+    restart: unless-stopped
+volumes:
+  hyperrx-db:
+  hyperrx-cache:

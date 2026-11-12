@@ -1,0 +1,11 @@
+{
+ "_note": "임시 표기 변형표입니다. 팀의 약명 정규화가 정해지면 그 결과로 바꿉니다. 근거 대시보드의 규칙 조회(clinical.py)에서만 씁니다: 질문 속 변형 표기를 DUR 성분명으로 읽고, 허가사항 문장에서 약 이름을 찾을 때 함께 찾으며, 허가 제품의 주성분 이름을 DUR 성분에 연결합니다. 검색(evidence.py)과 답변 생성에는 쓰지 않습니다. 각 표기는 kdb-v1.0.2-20261105 원문 청크에서 실제로 쓰이는지 확인했습니다(2026-11-05). 이소소르비드 표기는 허가 원자료의 ATC 코드로 성분을 확인했습니다(2026-11-06, 일질산염 C01DA14, 이질산염 C01DA08). 이소비지속성캡슐은 머리글 영문명만 Mononitrate이고 ATC, 한글 주성분, 용법은 이질산염이므로 한글명으로 이질산염에 연결하고 영문명은 넣지 않았습니다.",
+ "groups": [
+  {"canonical": "클래리트로마이신", "en": "Clarithromycin", "spellings": ["클래리트로마이신", "클래리스로마이신", "클라리트로마이신", "클라리스로마이신"]},
+  {"canonical": "와파린", "en": "Warfarin", "spellings": ["와파린", "와르파린"]},
+  {"canonical": "에리트로마이신", "en": "Erythromycin", "spellings": ["에리트로마이신", "에리스로마이신"]},
+  {"canonical": "아스피린", "en": "Aspirin", "spellings": ["아스피린", "아세틸살리실산"]},
+  {"canonical": "이소소르비드일질산염", "en": "Isosorbide mononitrate", "spellings": ["이소소르비드일질산염", "이소소르비드-5-모노니트레이트", "이소소르비드일질산염서방과립", "Isosorbide-5-Mononitrate", "Isosorbide-5-Mononitrate 90%", "Isosorbide-5-Mononitrate Montan Glycol Wax Mixture 40%"]},
+  {"canonical": "이소소르비드이질산염", "en": "Isosorbide dinitrate", "spellings": ["이소소르비드이질산염", "이소소르비드질산염", "질산이소소르비드", "질산이소소르비드/염화나트륨", "지속성질산이소소르비드펠렛", "이소소르비드이질산염지속과립", "Isosorbide Nitrate"]}
+ ]
+}
